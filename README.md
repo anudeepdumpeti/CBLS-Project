@@ -1,7 +1,7 @@
 # CBLS-Project 
 Empowering - Student Through Choice based learning system using Machine Learning 
 
-The project is based on choice based learning system which meanes students can choose faculty based on their experience, teaching performance and feedback given by students moreover students and faculties can communicate eachother if they get any doubts. Admin can manage students, faculties and view the performace of faculties. Faculty can add attendance, add marks, give assignments, view progress of students, view student messages, send messages to students and upload materials. Student can choose faculty, view marks, view materials, give feedback, send messages to faculty and view messages of faculties.
+The project is based on choice based learning system which meanes students can choose faculty based on their experience, teaching performance and feedback given by students moreover students and faculties can communicate eachother if they get any doubts. Admin can manage students, faculties and view the performace of faculties. Faculty can add attendance, add marks, give assignments, view progress of students, view student messages, send messages to students and upload materials. Student can choose faculty, view marks, view materials, give feedback, send messages to faculty and view messages of faculties. Machine learning predict the performace of students i.e Good, Fair, Poor.
 
 
 # **Database to create tables in SQL**
