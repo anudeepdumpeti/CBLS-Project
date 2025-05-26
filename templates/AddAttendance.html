@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Faculty Portal | University Name</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        function validate(form) {
+            // Validation script would go here
+            return true;
+        }
+    </script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #4f46e5;
+            --accent: #3b82f6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #1e293b;
+            --medium: #64748b;
+            --light: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            animation: light-sweep 8s infinite;
+        }
+        
+        @keyframes light-sweep {
+            0% { transform: translateX(-100%); }
+            50%, 100% { transform: translateX(100%); }
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo h1 {
+            color: white;
+            font-weight: 700;
+            font-size: 1.75rem;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--gray-100);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .nav-item {
+            list-style: none;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-link i {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(37, 99, 235, 0.2);
+        }
+        
+        .nav-link:hover i {
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .form-container {
+            padding: 2.5rem;
+        }
+        
+        .form-content {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--gray-200);
+            position: relative;
+        }
+        
+        .form-title {
+            color: var(--dark);
+            font-size: 1.75rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .alert-danger {
+            background-color: #fef2f2;
+            color: var(--danger);
+            border-left: 4px solid var(--danger);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            outline: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: inherit;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-lg {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn-submit {
+            display: block;
+            width: 100%;
+            max-width: 250px;
+            margin: 2rem auto 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-submit::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(25deg);
+            transition: 0.6s;
+        }
+        
+        .btn-submit:hover::after {
+            transform: rotate(25deg) translateX(150%);
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .shape-1 {
+            top: -20px;
+            right: -20px;
+            font-size: 6rem;
+            color: var(--primary);
+        }
+        
+        .shape-2 {
+            bottom: -20px;
+            left: -20px;
+            font-size: 5rem;
+            color: var(--secondary);
+            transform: rotate(45deg);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .nav-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .form-container {
+                padding: 1.5rem;
+            }
+            
+            .form-content {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Faculty Portal</h1>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <ul class="nav-grid">
+                <li class="nav-item">
+                    <a href="{% url 'AddAttendance' %}" class="nav-link">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Attendance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'CreateAssignments' %}" class="nav-link">
+                        <i class="fas fa-tasks"></i>
+                        <span>Assignments</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'UploadMaterial' %}" class="nav-link">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Materials</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'AddMarks' %}" class="nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Grades</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'Messaging' %}" class="nav-link">
+                        <i class="fas fa-comments"></i>
+                        <span>Messaging</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'ViewProgressReport' %}" class="nav-link">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Progress</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'ViewStudentMessages' %}" class="nav-link">
+                        <i class="fas fa-inbox"></i>
+                        <span>Student Mail</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'index' %}" class="nav-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="form-container">
+                <form name="f1" method="post" action="{% url 'AddAttendanceAction' %}" onsubmit="return validate(this);" class="form-content">
+                    {% csrf_token %}
+                    
+                    <i class="fas fa-shapes floating-shapes shape-1"></i>
+                    <i class="fas fa-palette floating-shapes shape-2"></i>
+                    
+                    <h2 class="form-title">Record Attendance</h2>
+                    
+                    {% if data %}
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-circle"></i>
+                        {{ data }}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="form-data">
+                        {{ data1|safe }}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg btn-submit">
+                        Submit Attendance
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,478 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Faculty Portal | Add Marks</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script language="javascript">
+        function validate(formObj) {
+            if(formObj.t1.value.length==0) {
+                alert("Please Enter Course name");
+                formObj.t1.focus();
+                return false;
+            }
+            if(formObj.t2.value.length==0) {
+                alert("Please Enter Subject Name");
+                formObj.t2.focus();
+                return false;
+            }
+            if(formObj.t4.value.length==0) {
+                alert("Please Enter Secured Marks");
+                formObj.t4.focus();
+                return false;
+            }
+            if(formObj.t5.value.length==0) {
+                alert("Please Enter Feedback");
+                formObj.t5.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #4f46e5;
+            --accent: #3b82f6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #1e293b;
+            --medium: #64748b;
+            --light: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            animation: light-sweep 8s infinite;
+        }
+        
+        @keyframes light-sweep {
+            0% { transform: translateX(-100%); }
+            50%, 100% { transform: translateX(100%); }
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo h1 {
+            color: white;
+            font-weight: 700;
+            font-size: 1.75rem;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--gray-100);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .nav-item {
+            list-style: none;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-link i {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(37, 99, 235, 0.2);
+        }
+        
+        .nav-link:hover i {
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .form-container {
+            padding: 2.5rem;
+        }
+        
+        .form-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--gray-200);
+            position: relative;
+        }
+        
+        .form-title {
+            color: var(--dark);
+            font-size: 1.75rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .alert-danger {
+            background-color: #fef2f2;
+            color: var(--danger);
+            border-left: 4px solid var(--danger);
+        }
+        
+        .form-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .form-table td {
+            padding: 0.75rem;
+            vertical-align: top;
+        }
+        
+        .form-table td:first-child {
+            width: 35%;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            outline: none;
+        }
+        
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%231e293b' viewBox='0 0 16 16'%3E%3Cpath d='M8 9.5a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5z'/%3E%3Cpath d='M8 4a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 4zm0 8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: inherit;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-lg {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .shape-1 {
+            top: -20px;
+            right: -20px;
+            font-size: 6rem;
+            color: var(--primary);
+        }
+        
+        .shape-2 {
+            bottom: -20px;
+            left: -20px;
+            font-size: 5rem;
+            color: var(--secondary);
+            transform: rotate(45deg);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .nav-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .form-container {
+                padding: 1.5rem;
+            }
+            
+            .form-content {
+                padding: 1.5rem;
+            }
+            
+            .form-table td {
+                display: block;
+                width: 100%;
+            }
+            
+            .form-table td:first-child {
+                width: 100%;
+                padding-bottom: 0.25rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h1>Faculty Portal</h1>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <ul class="nav-grid">
+                <li class="nav-item">
+                    <a href="{% url 'AddAttendance' %}" class="nav-link">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Attendance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'CreateAssignments' %}" class="nav-link">
+                        <i class="fas fa-tasks"></i>
+                        <span>Assignments</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'UploadMaterial' %}" class="nav-link">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Materials</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'AddMarks' %}" class="nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Grades</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'Messaging' %}" class="nav-link">
+                        <i class="fas fa-comments"></i>
+                        <span>Messaging</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'ViewProgressReport' %}" class="nav-link">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Progress</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'ViewStudentMessages' %}" class="nav-link">
+                        <i class="fas fa-inbox"></i>
+                        <span>Student Mail</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'index' %}" class="nav-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="form-container">
+                <form name="f1" method="post" action="{% url 'AddMarksAction' %}" onsubmit="return validate(this);" class="form-content">
+                    {% csrf_token %}
+                    
+                    <i class="fas fa-shapes floating-shapes shape-1"></i>
+                    <i class="fas fa-award floating-shapes shape-2"></i>
+                    
+                    <h2 class="form-title">Add Student Marks</h2>
+                    
+                    {% if data %}
+                    <div class="alert alert-danger">
+                        {{ data }}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="dynamic-data">
+                        {{ data1|safe }}
+                    </div>
+                    
+                    <table class="form-table">
+                        <tr>
+                            <td>Course Name</td>
+                            <td><input type="text" name="t1" class="form-control" placeholder="Enter course name"></td>
+                        </tr>
+                        <tr>
+                            <td>Subject Name</td>
+                            <td><input type="text" name="t2" class="form-control" placeholder="Enter subject name"></td>
+                        </tr>
+                        <tr>
+                            <td>Course Year</td>
+                            <td>
+                                <select name="t3" class="form-control">
+                                    <option value="I">I</option>
+                                    <option value="II">II</option>
+                                    <option value="III">III</option>
+                                    <option value="IV">IV</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Secured Marks</td>
+                            <td><input type="text" name="t4" class="form-control" placeholder="Enter secured marks"></td>
+                        </tr>
+                        <tr>
+                            <td>Feedback</td>
+                            <td><input type="text" name="t5" class="form-control" placeholder="Enter feedback for student"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><button type="submit" class="btn btn-primary btn-lg">Submit Marks</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

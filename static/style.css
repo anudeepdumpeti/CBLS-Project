@@ -1,0 +1,236 @@
+@charset "utf-8";
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --accent: #4895ef;
+    --dark: #2b2d42;
+    --light: #f8f9fa;
+    --text: #4a4a4a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.logo {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+h1 span {
+    color: var(--primary);
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--primary);
+}
+
+.menu_nav {
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    padding: 1rem;
+}
+
+.menu_nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu_nav ul li {
+    flex: 1 1 auto;
+}
+
+.menu_nav ul li a {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1.5rem;
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: rgba(var(--primary), 0.1);
+}
+
+.menu_nav ul li a:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(var(--primary), 0.3);
+}
+
+.content {
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.mainbar {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.sidebar {
+    background: rgba(var(--primary), 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+
+.fbg {
+    background: linear-gradient(135deg, var(--dark), var(--primary));
+    color: white;
+    padding: 3rem 0;
+    margin-top: 3rem;
+    border-radius: 16px;
+}
+
+.footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--text);
+    margin-top: 3rem;
+}
+
+/* Form Elements */
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(var(--primary), 0.2);
+    outline: none;
+}
+
+input[type="submit"] {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(var(--primary), 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .menu_nav ul {
+        flex-direction: column;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .content {
+        padding: 1.5rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animated {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Utility Classes */
+.shadow-lg {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.rounded-xl {
+    border-radius: 1rem;
+}
+
+.p-6 {
+    padding: 1.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.flex {
+    display: flex;
+    gap: 1rem;
+}
+
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}

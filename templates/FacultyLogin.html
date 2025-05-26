@@ -1,0 +1,403 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Faculty Login</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        function validate(formObj) {
+            if(formObj.t1.value.length==0) {
+                alert("Please Enter Username");
+                formObj.t1.focus();
+                return false;
+            }
+            if(formObj.t2.value.length==0) {
+                alert("Please Enter Password");
+                formObj.t2.focus();
+                return false;
+            }
+            formObj.actionUpdateData.value="update";
+            return true;
+        }
+    </script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #4f46e5;
+            --accent: #3b82f6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #1e293b;
+            --medium: #64748b;
+            --light: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            animation: light-sweep 8s infinite;
+        }
+        
+        @keyframes light-sweep {
+            0% { transform: translateX(-100%); }
+            50%, 100% { transform: translateX(100%); }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo h1 {
+            color: white;
+            font-weight: 700;
+            font-size: 1.75rem;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 2rem;
+        }
+        
+        .nav-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--gray-100);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .nav-item {
+            list-style: none;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            white-space: nowrap;
+        }
+        
+        .nav-link i {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(37, 99, 235, 0.2);
+        }
+        
+        .nav-link:hover i {
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .banner {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+        
+        .login-form {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            position: relative;
+        }
+        
+        .form-title {
+            color: var(--dark);
+            font-size: 1.75rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .alert-danger {
+            background-color: #fef2f2;
+            color: var(--danger);
+            border-left: 4px solid var(--danger);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            outline: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: inherit;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .shape-1 {
+            top: -20px;
+            right: -20px;
+            font-size: 6rem;
+            color: var(--primary);
+        }
+        
+        .shape-2 {
+            bottom: -20px;
+            left: -20px;
+            font-size: 5rem;
+            color: var(--secondary);
+            transform: rotate(45deg);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header {
+                margin-bottom: 1.5rem;
+            }
+            
+            .logo {
+                padding: 1rem;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .login-form {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h1>Faculty Portal</h1>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="nav-container">
+                <ul class="nav-grid">
+                    <li class="nav-item">
+                        <a href="{% url 'index' %}" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'AdminLogin' %}" class="nav-link">
+                            <i class="fas fa-user-shield"></i>
+                            <span>Admin Login</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'FacultyLogin' %}" class="nav-link">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span>Teachers Login</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'StudentLogin' %}" class="nav-link">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Student Login</span>
+                        </a>
+                    </li>
+                </ul>
+                
+            </div>
+            
+            <div class="login-container">
+                <form name="f1" method="post" action="{% url 'FacultyLoginAction' %}" onsubmit="return validate(this);" class="login-form">
+                    {% csrf_token %}
+                    
+                    <i class="fas fa-key floating-shapes shape-1"></i>
+                    <i class="fas fa-lock floating-shapes shape-2"></i>
+                    
+                    <h2 class="form-title">Teacher Login</h2>
+                    
+                    {% if data %}
+                    <div class="alert alert-danger">
+                        {{ data }}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="form-group">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" id="username" name="t1" class="form-control" placeholder="Enter your username">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" id="password" name="t2" class="form-control" placeholder="Enter your password">
+                    </div>
+                    
+                    <input type="hidden" name="actionUpdateData" value="">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

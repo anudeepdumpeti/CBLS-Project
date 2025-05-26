@@ -1,0 +1,346 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Faculty Connect</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #4f46e5;
+            --accent: #3b82f6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #1e293b;
+            --medium: #64748b;
+            --light: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            animation: light-sweep 8s infinite;
+        }
+        
+        @keyframes light-sweep {
+            0% { transform: translateX(-100%); }
+            50%, 100% { transform: translateX(100%); }
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo h1 {
+            color: white;
+            font-weight: 700;
+            font-size: 1.75rem;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .nav-container {
+            background: var(--gray-100);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1rem;
+        }
+        
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .nav-item {
+            list-style: none;
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: white;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-link i {
+            font-size: 2rem;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(37, 99, 235, 0.2);
+        }
+        
+        .nav-link:hover i {
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .content-container {
+            padding: 3rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-text {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-align: center;
+            color: var(--dark);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--gray-200);
+            position: relative;
+        }
+        
+        .welcome-text h2 {
+            color: var(--primary);
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .welcome-text p {
+            margin-bottom: 1rem;
+        }
+        
+        .welcome-text strong {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .notification {
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: var(--gray-100);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            color: var(--dark);
+            font-weight: 500;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .decorative-shape {
+            position: absolute;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+        
+        .shape-1 {
+            top: -10%;
+            right: -5%;
+            font-size: 16rem;
+            color: var(--primary);
+            transform: rotate(15deg);
+        }
+        
+        .shape-2 {
+            bottom: -10%;
+            left: -5%;
+            font-size: 13rem;
+            color: var(--secondary);
+            transform: rotate(-15deg);
+        }
+        
+        .footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 1.5rem;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header {
+                padding: 1rem 1rem;
+            }
+            
+            .logo h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-item {
+                width: 100%;
+            }
+            
+            .content-container {
+                padding: 2rem 1rem;
+            }
+            
+            .welcome-text {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-users-class"></i>
+                <h1>Faculty Connect</h1>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <nav class="nav-container">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="{% url 'index' %}" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'AdminLogin' %}" class="nav-link">
+                            <i class="fas fa-user-shield"></i>
+                            <span>Admin Login</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'FacultyLogin' %}" class="nav-link">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span>Teachers Login</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'StudentLogin' %}" class="nav-link">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Student Login</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <section class="content-container">
+                <i class="fas fa-graduation-cap decorative-shape shape-1"></i>
+                <i class="fas fa-book decorative-shape shape-2"></i>
+                
+                <div class="welcome-text">
+                    <h2>Welcome to Faculty Connect</h2>
+                    <p>Student Performance Predictor & Tracker is an innovative platform designed to help educators monitor student progress and predict academic outcomes using advanced analytics.</p>
+                    <p>Our system provides comprehensive tools for <strong>attendance tracking</strong>, <strong>assignment management</strong>, <strong>performance analytics</strong>, and <strong>personalized feedback</strong> to support student success.</p>
+                </div>
+                
+                {% if data %}
+                <div>
+                    <h2>Performance Metrics</h2>
+                    <div>{{ data|safe }}</div>
+                    <img src="data:image/png;base64,{{ graph }}" alt="Metrics Graph" style="width: 100%; max-width: 800px; margin-top: 20px;">
+                </div>
+                {% endif %}
+            </section>
+        </main>
+        
+        <footer class="footer">
+            <p>© 2025 Faculty Connect - Student Performance Predictor & Tracker</p>
+        </footer>
+    </div>
+</body>
+</html>

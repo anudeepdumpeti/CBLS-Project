@@ -1,0 +1,402 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Student Portal</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #4f46e5;
+            --accent: #3b82f6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #1e293b;
+            --medium: #64748b;
+            --light: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            animation: light-sweep 8s infinite;
+        }
+        
+        @keyframes light-sweep {
+            0% { transform: translateX(-100%); }
+            50%, 100% { transform: translateX(100%); }
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo h1 {
+            color: white;
+            font-weight: 700;
+            font-size: 1.75rem;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--gray-100);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .nav-item {
+            list-style: none;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-link i {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(37, 99, 235, 0.2);
+        }
+        
+        .nav-link:hover i {
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .banner {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .content-area {
+            padding: 2.5rem;
+        }
+        
+        .welcome-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .welcome-card h2 {
+            color: var(--dark);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .welcome-card p {
+            color: var(--medium);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .shape-1 {
+            top: -20px;
+            right: -20px;
+            font-size: 6rem;
+            color: var(--primary);
+        }
+        
+        .shape-2 {
+            bottom: -20px;
+            left: -20px;
+            font-size: 5rem;
+            color: var(--secondary);
+            transform: rotate(45deg);
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dashboard-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .dashboard-card-header i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        
+        .dashboard-card-header h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin: 0;
+        }
+        
+        .dashboard-card-content {
+            color: var(--medium);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .nav-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .content-area {
+                padding: 1.5rem;
+            }
+            
+            .welcome-card {
+                padding: 1.5rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-user-graduate"></i>
+                <h1>Student Portal</h1>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <ul class="nav-grid">
+                <li class="nav-item">
+                    <a href="{% url 'ViewAssignments' %}" class="nav-link">
+                        <i class="fas fa-tasks"></i>
+                        <span>Upcoming Assignments</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'FacultySuggestion' %}" class="nav-link">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>Faculty Suggestion</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'DownloadMaterials' %}" class="nav-link">
+                        <i class="fas fa-download"></i>
+                        <span>Download Material</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'ViewMarks' %}" class="nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        <span>View Marks</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'ViewMessages' %}" class="nav-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>View Messages</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'index' %}" class="nav-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+            
+            
+            
+            <div class="content-area">
+                <div class="user-content">
+                    
+                        <div class="welcome-card">
+                            <i class="fas fa-shapes floating-shapes shape-1"></i>
+                            <i class="fas fa-palette floating-shapes shape-2"></i>
+                            
+                            <h2>Welcome to your Student Portal</h2>
+                            <p>Access your assignments, course materials, grades, and messages from faculty. Stay organized and on track with your academic journey.</p>
+                        </div>
+                        
+                        <div class="dashboard-grid">
+                            <div class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <i class="fas fa-tasks"></i>
+                                    <h3>Assignments</h3>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <p>View your upcoming assignments and deadlines. Stay on top of your coursework.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <i class="fas fa-book"></i>
+                                    <h3>Course Materials</h3>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <p>Access and download learning materials, lecture notes, and resources.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <h3>Grades</h3>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <p>Check your academic performance and track your progress in each course.</p>
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+                <div class="welcome-card">
+                  {{ data|safe }}
+              </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
